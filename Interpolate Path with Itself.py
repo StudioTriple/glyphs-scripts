@@ -26,14 +26,18 @@ for path in selectedPaths:
     else:
         # checks if path has an even number of nodes
         nodeCount = len( path.nodes )
+        # print(nodeCount, nodeCount/2)
         if nodeCount % 2 == 0:
             nodes = path.nodes
             # creates node pairs that will be interpolated
             nodePairsIndex = []
-            for i in range( nodeCount/2 ):
+            for i in range(int(nodeCount/2)):
                 nodePairsIndex.append([ i-1, nodeCount-2-i ])
             # performs the interpolation
             for pair in nodePairsIndex:
-                newPosition = interpolateNode( nodes[pair[0]], nodes[pair[1]], 0.0 )
+                newPosition = interpolateNode( nodes[pair[0]], nodes[pair[1]], 0.5 )
                 nodes[pair[1]].x = newPosition[0]
                 nodes[pair[1]].y = newPosition[1]
+
+        else:
+            print("Path doesn't contain an even number of nodes")
